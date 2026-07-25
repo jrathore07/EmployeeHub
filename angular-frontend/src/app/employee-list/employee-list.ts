@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Employee } from '../employee';
 import { CommonModule } from '@angular/common';
 import { EmployeeService } from '../services/employee';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-employee-list',
@@ -13,17 +14,13 @@ import { EmployeeService } from '../services/employee';
 export class EmployeeListComponent implements OnInit {
 
   employees: Employee[]=[] ;
-  constructor(private employeeService: EmployeeService) { }
+  constructor(private employeeService: EmployeeService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.getEmployees();
   }
-
-//   private getEmployees() {
-//     this.employeeService.getEmployeeList().subscribe(data => {
-//       this.employees = data;
-//     });
-// }
 private getEmployees() {
   this.employeeService.getEmployeeList().subscribe({
     next: (data) => {
@@ -35,5 +32,25 @@ private getEmployees() {
     }
   });
 }
+
+  employeeDetails(id: number) {
+    this.router.navigate(['employee-details', id]);
+  }
+    
+  updateEmployee(id: number) {
+    this.router.navigate(['update-employee', id]);
+  }
+
+  deleteEmployee(id: number) {
+    this.employeeService.deleteEmployee(id).subscribe({
+      next: (data) => {
+        console.log("Employee deleted:", data);
+        this.getEmployees(); // Refresh the list after deletion
+      },
+      error: (err) => {
+        console.error("Error deleting employee:", err);
+      }
+    });
+  }
 }
 

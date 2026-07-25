@@ -1,0 +1,14 @@
+<h1> Employee Details</h1>
+<div>
+    <div class="card">
+        <div class="card-header">
+        Employee Id: {{ employee.id }}
+        </div>
+        <div class="card-body">
+        <h5 class="card-title">Employee Name: {{ employee.firstName }} {{ employee.lastName }}</h5>
+        <p class="card-text">Employee Email: {{ employee.email }}</p>
+        <a routerLink="/employees" class="btn btn-primary">Back to List</a>
+        </div>
+    </div>
+</div>
+

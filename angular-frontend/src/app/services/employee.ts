@@ -19,5 +19,16 @@ createEmployee(employee: Employee): Observable<Object> {
   return this.http.post(`${this.baseUrl}`, employee); 
 }
 
+getEmployeeById(id: number): Observable<Employee> {
+  return this.http.get<Employee>(`${this.baseUrl}/${id}`);
+  }
+
+updateEmployee(id: number, employee: Employee): Observable<Object> {
+  return this.http.put(`${this.baseUrl}/${id}`, employee);
+}
+
+deleteEmployee(id: number): Observable<Object> {
+  return this.http.delete(`${this.baseUrl}/${id}`);
+}
 
 }
